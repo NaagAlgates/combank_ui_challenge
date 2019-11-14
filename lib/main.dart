@@ -1,4 +1,10 @@
+import 'dart:developer';
+
+import 'package:combank_ui_challenge/view/sliding_menu_icon.dart';
 import 'package:flutter/material.dart';
+
+import 'helpers/themes.dart';
+import 'view/help_menu_icon.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,56 +13,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: comBankThemeData,
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: Container(
+          width: MediaQuery.of(context).size.width * 0.8,
+          color: Colors.black87,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.1),
+            child: AppBar(
+              elevation: 0.0,
+              backgroundColor:comBankThemeData.primaryColor,
+              leading: Container(),
+              flexibleSpace: Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    customNavigationDrawer(context),
+                    customMessageView(context)
+                  ],
+                ),
+              ),
+            ),
+        ),
+        body: Container(
+            color: comBankThemeData.primaryColor,
+          ),
       ),
     );
   }
