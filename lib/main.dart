@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:combank_ui_challenge/view/custom_drawer_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'helpers/themes.dart';
@@ -37,10 +38,7 @@ class _HomePageState extends State<HomePage> {
       top: false,
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: Container(
-          width: MediaQuery.of(context).size.width * 0.8,
-          color: Colors.black87,
-        ),
+        drawer: customDrawerMenu(context),
         /*appBar: PreferredSize(
             preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.1),
             child: AppBar(
@@ -52,22 +50,27 @@ class _HomePageState extends State<HomePage> {
         ),*/
         body: SingleChildScrollView(
           child: Container(
-              color: comBankThemeData.primaryColor,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    customMenuView(context,Icons.dehaze),
-                    customMenuView(context,Icons.message)
-                  ],
-                ),
+            color: comBankThemeData.primaryColor,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    child: customMenuView(context, Icons.dehaze),
+                    onTap: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
+                  ),
+                  customMenuView(context, Icons.message)
+                ],
               ),
             ),
+          ),
         ),
       ),
     );
