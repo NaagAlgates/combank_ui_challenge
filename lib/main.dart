@@ -39,15 +39,25 @@ class _HomePageState extends State<HomePage> {
           width: MediaQuery.of(context).size.width * 0.8,
           color: Colors.black87,
         ),
-        appBar: PreferredSize(
+        /*appBar: PreferredSize(
             preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.1),
             child: AppBar(
               elevation: 0.0,
               backgroundColor:comBankThemeData.primaryColor,
               leading: Container(),
-              flexibleSpace: Padding(
+              flexibleSpace:
+            ),
+        ),*/
+        body: SingleChildScrollView(
+          child: Container(
+              color: comBankThemeData.primaryColor,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Padding(
                 padding: const EdgeInsets.only(top: 5.0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     customNavigationDrawer(context),
@@ -57,9 +67,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
         ),
-        body: Container(
-            color: comBankThemeData.primaryColor,
-          ),
       ),
     );
   }
