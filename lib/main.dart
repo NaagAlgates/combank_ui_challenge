@@ -27,18 +27,31 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    print("open");
+  }
+
+  @override
+  void dispose() {
+    print("close");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var _height = MediaQuery.of(context).size.height;
     return SafeArea(
       minimum: const EdgeInsets.all(0.0),
       bottom: false,
       top: false,
       child: Scaffold(
         key: _scaffoldKey,
-        drawer: customDrawerMenu(context),
+        drawer: CustomDrawer(),
         /*appBar: PreferredSize(
             preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.1),
             child: AppBar(
@@ -54,19 +67,19 @@ class _HomePageState extends State<HomePage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.only(top:_height*0.035),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    child: customMenuView(context, Icons.dehaze),
+                    child: CustomMenu(icon: Icons.dehaze,paddingLeft: true,paddingRight: false,paddingTop: false,),
                     onTap: () {
                       _scaffoldKey.currentState.openDrawer();
                     },
                   ),
-                  customMenuView(context, Icons.message)
+                  CustomMenu(icon: Icons.message,paddingLeft: false,paddingRight: true,paddingTop: false,)
                 ],
               ),
             ),
