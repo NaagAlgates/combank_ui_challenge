@@ -8,3 +8,4 @@ final ThemeData comBankThemeData = new ThemeData(
     accentColor: const Color(0xFFFFEB9F),
     primaryColorLight: const Color(0xFFFBCB09),
     primaryColorDark: const Color(0xFFF9CA51));
+

@@ -1,10 +1,9 @@
 import 'dart:developer';
 
-import 'package:combank_ui_challenge/view/sliding_menu_icon.dart';
 import 'package:flutter/material.dart';
 
 import 'helpers/themes.dart';
-import 'view/help_menu_icon.dart';
+import 'view/custom_menu_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,6 +32,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      minimum: const EdgeInsets.all(0.0),
+      bottom: false,
+      top: false,
       child: Scaffold(
         key: _scaffoldKey,
         drawer: Container(
@@ -54,14 +56,14 @@ class _HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Padding(
-                padding: const EdgeInsets.only(top: 5.0),
+                padding: const EdgeInsets.only(top: 10.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    customNavigationDrawer(context),
-                    customMessageView(context)
+                    customMenuView(context,Icons.dehaze),
+                    customMenuView(context,Icons.message)
                   ],
                 ),
               ),
