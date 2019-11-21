@@ -67,19 +67,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Padding(
-              padding: EdgeInsets.only(top:_height*0.035),
+              padding: EdgeInsets.only(top: _height * 0.035),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
-                    child: CustomMenu(icon: Icons.dehaze,paddingLeft: true,paddingRight: false,paddingTop: false,),
+                    child: CustomMenu(
+                      icon: Icons.dehaze,
+                      paddingLeft: true,
+                      paddingRight: false,
+                      paddingTop: false,
+                    ),
                     onTap: () {
                       _scaffoldKey.currentState.openDrawer();
                     },
                   ),
-                  CustomMenu(icon: Icons.message,paddingLeft: false,paddingRight: true,paddingTop: false,)
+                  CustomMenu(
+                    icon: Icons.message,
+                    paddingLeft: false,
+                    paddingRight: true,
+                    paddingTop: false,
+                  )
                 ],
               ),
             ),

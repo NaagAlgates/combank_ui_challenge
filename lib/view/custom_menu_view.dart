@@ -15,7 +15,10 @@ class CustomMenu extends StatefulWidget {
       @required this.paddingTop,
       @required this.paddingLeft,
       @required this.paddingRight})
-      : assert(icon != null && paddingLeft != null && paddingRight != null && paddingTop!=null);
+      : assert(icon != null &&
+            paddingLeft != null &&
+            paddingRight != null &&
+            paddingTop != null);
 
   @override
   _CustomMenuState createState() => _CustomMenuState();
@@ -23,11 +26,23 @@ class CustomMenu extends StatefulWidget {
 
 class _CustomMenuState extends State<CustomMenu> {
   @override
+  void initState() {
+    super.initState();
+    print("menu open");
+  }
+
+  @override
+  void dispose() {
+    print("menu close");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.only(
-          top:widget.paddingTop?_height*0.042:_height * 0.01,
+          top: widget.paddingTop ? _height * 0.042 : _height * 0.01,
           right: widget.paddingRight ? _height * 0.02 : 0.0,
           left: widget.paddingLeft ? _height * 0.02 : 0.0),
       child: ClipRRect(
