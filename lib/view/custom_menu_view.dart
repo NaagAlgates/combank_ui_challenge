@@ -5,13 +5,14 @@ class CustomMenu extends StatefulWidget {
   var icon;
   var iconColor;
   var backgroundColor;
-  var paddingRight = false, paddingLeft = false, paddingTop;
-
+  var paddingRight = false, paddingLeft = false, paddingTop, showText;
+  var _textVisibility=false;
   CustomMenu(
       {Key key,
       @required this.icon,
       this.iconColor,
       this.backgroundColor,
+      @required this.showText,
       @required this.paddingTop,
       @required this.paddingLeft,
       @required this.paddingRight})
@@ -29,6 +30,9 @@ class _CustomMenuState extends State<CustomMenu> {
   void initState() {
     super.initState();
     print("menu open");
+    displayText();
+    hideText();
+
   }
 
   @override
@@ -47,22 +51,51 @@ class _CustomMenuState extends State<CustomMenu> {
           left: widget.paddingLeft ? _height * 0.02 : 0.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(_height),
-        child: Container(
-          width: _height * .06,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
           height: _height * .06,
+          width: widget.showText && widget._textVisibility? _height*0.1:_height * .06,
           color: widget.backgroundColor == null
               ? comBankThemeData.accentColor
               : widget.backgroundColor,
           child: Center(
-            child: Icon(
-              widget.icon,
-              size: _height * 0.025,
-              color:
-                  widget.iconColor == null ? Colors.black87 : widget.iconColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Icon(
+                  widget.icon,
+                  size: _height * 0.025,
+                  color:
+                      widget.iconColor == null ? Colors.black87 : widget.iconColor,
+                ),
+                Visibility(
+                  visible: widget._textVisibility,
+                  child: Padding(
+                    padding: widget.showText && widget._textVisibility? EdgeInsets.only(left: _height*0.008): const EdgeInsets.only(left:0.0),
+                    child: Text(widget.showText && widget._textVisibility? "Hi":"",style: TextStyle(color: Colors.black,fontSize: _height*0.021),),
+                  ),
+                )
+              ],
             ),
           ),
         ),
       ),
     );
+  }
+  void displayText(){
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      setState(() {
+        widget._textVisibility =true;
+      });
+    });
+  }
+  void hideText(){
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      setState(() {
+        widget._textVisibility =false;
+      });
+    });
   }
 }

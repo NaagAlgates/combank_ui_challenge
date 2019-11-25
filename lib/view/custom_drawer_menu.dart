@@ -12,6 +12,7 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer>
     with TickerProviderStateMixin {
   var _viewVisibility;
+
   @override
   void initState() {
     super.initState();
@@ -44,10 +45,10 @@ class _CustomDrawerState extends State<CustomDrawer>
           color: Colors.black,
         ),
         Visibility(
-            visible: _viewVisibility,
-            child:
-            InkWell(
-              child: CustomMenu(
+          visible: _viewVisibility,
+          child: InkWell(
+            child: CustomMenu(
+              showText: false,
               icon: Icons.close,
               backgroundColor: Colors.white,
               iconColor: Colors.black,
@@ -55,16 +56,16 @@ class _CustomDrawerState extends State<CustomDrawer>
               paddingRight: true,
               paddingTop: true,
             ),
-              onTap: (){
+            onTap: () {
+              setState(() {
+                _viewVisibility = false;
+              });
+              Future.delayed(const Duration(milliseconds: 250), () {
                 setState(() {
-                  _viewVisibility=false;
+                  Navigator.pop(context);
                 });
-                Future.delayed(const Duration(milliseconds: 250), () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                });
-              },
+              });
+            },
           ),
         ),
       ],

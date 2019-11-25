@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 children: [
                   InkWell(
                     child: CustomMenu(
+                      showText: false,
                       icon: Icons.dehaze,
                       paddingLeft: true,
                       paddingRight: false,
@@ -85,6 +86,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     },
                   ),
                   CustomMenu(
+                    showText: true,
                     icon: Icons.message,
                     paddingLeft: false,
                     paddingRight: true,
