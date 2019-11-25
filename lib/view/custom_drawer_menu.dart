@@ -18,11 +18,7 @@ class _CustomDrawerState extends State<CustomDrawer>
     super.initState();
     print("Drawer open");
     _viewVisibility = false;
-    Future.delayed(const Duration(milliseconds: 500), () {
-      setState(() {
-        _viewVisibility = true;
-      });
-    });
+    displayButton();
   }
 
   @override
@@ -60,15 +56,25 @@ class _CustomDrawerState extends State<CustomDrawer>
               setState(() {
                 _viewVisibility = false;
               });
-              Future.delayed(const Duration(milliseconds: 250), () {
-                setState(() {
-                  Navigator.pop(context);
-                });
-              });
+              hideButton();
             },
           ),
         ),
       ],
     );
+  }
+  void displayButton(){
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        _viewVisibility = true;
+      });
+    });
+  }
+  void hideButton(){
+    Future.delayed(const Duration(milliseconds: 250), () {
+      setState(() {
+        Navigator.pop(context);
+      });
+    });
   }
 }
