@@ -44,7 +44,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
+    var _height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    var _width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return SafeArea(
       minimum: const EdgeInsets.all(0.0),
       bottom: false,
@@ -63,37 +70,72 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),*/
         body: SingleChildScrollView(
           child: Container(
-            color: comBankThemeData.primaryColor,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Padding(
-              padding: EdgeInsets.only(top: _height * 0.035),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    child: CustomMenu(
-                      showText: false,
-                      icon: Icons.dehaze,
-                      paddingLeft: true,
-                      paddingRight: false,
-                      paddingTop: false,
+            width: _width,
+            height: _height,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  top: _height*0.0,
+                  child: Container(
+                    color: comBankThemeData.primaryColor,
+                    width: _width,
+                    height: _height*0.12,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: _height * 0.035),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            child: CustomMenu(
+                              showText: false,
+                              icon: Icons.dehaze,
+                              paddingLeft: true,
+                              paddingRight: false,
+                              paddingTop: false,
+                            ),
+                            onTap: () {
+                              _scaffoldKey.currentState.openDrawer();
+                            },
+                          ),
+                          CustomMenu(
+                            showText: true,
+                            icon: Icons.message,
+                            paddingLeft: false,
+                            paddingRight: true,
+                            paddingTop: false,
+                          )
+                        ],
+                      ),
                     ),
-                    onTap: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
                   ),
-                  CustomMenu(
-                    showText: true,
-                    icon: Icons.message,
-                    paddingLeft: false,
-                    paddingRight: true,
-                    paddingTop: false,
-                  )
-                ],
-              ),
+                ),
+                Positioned(
+                  top: _height*0.12,
+                  child: Container(
+                    height: _height * 0.3,
+                    width: _width,
+                    color: comBankThemeData.primaryColor,
+                  ),
+                ),
+                Positioned(
+                  top: _height*0.42,
+                  child: Container(
+                    height: _height * 0.35,
+                    width: _width,
+                    color: comBankThemeData.primaryColor,
+                  ),
+                ),
+                Positioned(
+                  top: _height*0.77,
+                  child: Container(
+                    height: _height * 0.23,
+                    width: _width,
+                    color: comBankThemeData.primaryColor,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
