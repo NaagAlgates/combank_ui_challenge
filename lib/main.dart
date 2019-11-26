@@ -4,7 +4,7 @@ import 'package:combank_ui_challenge/view/custom_drawer_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'helpers/themes.dart';
-import 'view/custom_menu_view.dart';
+import 'view/custom_button_menu_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -59,16 +59,35 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: CustomDrawer(),
-        /*appBar: PreferredSize(
-            preferredSize: Size.fromHeight(MediaQuery.of(context).size.height*0.1),
-            child: AppBar(
-              elevation: 0.0,
-              backgroundColor:comBankThemeData.primaryColor,
-              leading: Container(),
-              flexibleSpace:
-            ),
-        ),*/
-        body: SingleChildScrollView(
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              leading: InkWell(
+                child: MenuButton(
+                  showText: false,
+                  icon: Icons.dehaze,
+                  paddingLeft: true,
+                  paddingRight: false,
+                  paddingTop: false,
+                ),
+                onTap: (){
+                  _scaffoldKey.currentState.openDrawer();
+                },
+              ),
+              actions: <Widget>[
+                MenuButton(
+                  showText: true,
+                  icon: Icons.message,
+                  paddingLeft: false,
+                  paddingRight: true,
+                  paddingTop: false,
+                )
+              ],
+              expandedHeight: _height*0.09,
+            )
+          ],
+        ),
+        /*body: SingleChildScrollView(
           child: Container(
             width: _width,
             height: _height,
@@ -138,7 +157,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-        ),
+        ),*/
       ),
     );
   }

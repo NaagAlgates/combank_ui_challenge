@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_menu_view.dart';
+import 'custom_button_menu_view.dart';
 
 class CustomDrawer extends StatefulWidget {
   CustomDrawer({Key key}) : super(key: key);
@@ -43,7 +43,7 @@ class _CustomDrawerState extends State<CustomDrawer>
         Visibility(
           visible: _viewVisibility,
           child: InkWell(
-            child: CustomMenu(
+            child: MenuButton(
               showText: false,
               icon: Icons.close,
               backgroundColor: Colors.white,

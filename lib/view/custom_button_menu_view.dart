@@ -1,14 +1,14 @@
 import 'package:combank_ui_challenge/helpers/themes.dart';
 import 'package:flutter/material.dart';
 
-class CustomMenu extends StatefulWidget {
+class MenuButton extends StatefulWidget {
   var icon;
   var iconColor;
   var backgroundColor;
   var paddingRight = false, paddingLeft = false, paddingTop, showText;
   var _textVisibility = false;
 
-  CustomMenu(
+  MenuButton(
       {Key key,
       @required this.icon,
       this.iconColor,
@@ -23,10 +23,10 @@ class CustomMenu extends StatefulWidget {
             paddingTop != null);
 
   @override
-  _CustomMenuState createState() => _CustomMenuState();
+  _MenuButtonState createState() => _MenuButtonState();
 }
 
-class _CustomMenuState extends State<CustomMenu> {
+class _MenuButtonState extends State<MenuButton> {
   @override
   void initState() {
     super.initState();
@@ -49,16 +49,16 @@ class _CustomMenuState extends State<CustomMenu> {
     return Padding(
       padding: EdgeInsets.only(
           top: widget.paddingTop ? _height * 0.042 : _height * 0.01,
-          right: widget.paddingRight ? _height * 0.02 : 0.0,
-          left: widget.paddingLeft ? _height * 0.02 : 0.0),
+          right: widget.paddingRight ? _height * 0.01 : 0.0,
+          left: widget.paddingLeft ? _height * 0.01 : 0.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(_height),
         child: AnimatedContainer(
           duration: Duration(milliseconds: 200),
-          height: _height * .06,
+          height: 45.0,
           width: widget.showText && widget._textVisibility
               ? _height * 0.1
-              : _height * .06,
+              : 45.0,
           color: widget.backgroundColor == null
               ? comBankThemeData.accentColor
               : widget.backgroundColor,
@@ -70,7 +70,7 @@ class _CustomMenuState extends State<CustomMenu> {
               children: <Widget>[
                 Icon(
                   widget.icon,
-                  size: _height * 0.025,
+                  size: _height * 0.0225,
                   color: widget.iconColor == null
                       ? Colors.black87
                       : widget.iconColor,
@@ -84,7 +84,7 @@ class _CustomMenuState extends State<CustomMenu> {
                     child: Text(
                       widget.showText && widget._textVisibility ? "Hi" : "",
                       style: TextStyle(
-                          color: Colors.black, fontSize: _height * 0.021),
+                          color: Colors.black, fontSize: _height * 0.020),
                     ),
                   ),
                 )
