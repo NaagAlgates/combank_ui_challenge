@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:combank_ui_challenge/view/custom_drawer_menu.dart';
 import 'package:flutter/material.dart';
@@ -44,14 +43,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    var _width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    var _height = MediaQuery.of(context).size.height;
+    var _width = MediaQuery.of(context).size.width;
     return SafeArea(
       minimum: const EdgeInsets.all(0.0),
       bottom: false,
@@ -70,7 +63,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   paddingRight: false,
                   paddingTop: false,
                 ),
-                onTap: (){
+                onTap: () {
                   _scaffoldKey.currentState.openDrawer();
                 },
               ),
@@ -83,8 +76,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   paddingTop: false,
                 )
               ],
-              expandedHeight: _height*0.09,
-            )
+              expandedHeight: _height * 0.09,
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Card(child: Text('data'),),
+                  Card(child: Text('data'),),
+                  Card(child: Text('data'),),
+                  Card(child: Text('data'),),
+
+                  // Scrollable horizontal widget here
+                ],
+              ),
+            ),
           ],
         ),
         /*body: SingleChildScrollView(
