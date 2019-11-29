@@ -7,31 +7,81 @@ class DrawerMenuList extends StatelessWidget {
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-        child: Container(
+    return Container(
         color: Colors.transparent,
         height: _height,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            SearchView(),
-            SingleMenuView(label: "Chat with us",leftIcon: Icons.message,),
-            SingleMenuView(label: "My details",leftIcon: Icons.person_outline,),
-            SingleMenuView(label: "What's new",leftIcon: Icons.star_border,rightIcon: Icons.navigate_next,),
-            SingleMenuView(label: "Products & offers",leftIcon: Icons.local_offer,),
-            SingleMenuView(label: "Find ATMa & branches",leftIcon: Icons.location_on,),
-            SingleMenuView(label: "Bills and upcoming payments",leftIcon: Icons.calendar_today,),
-            SingleMenuView(label: "Shared expenses",leftIcon: Icons.group,),
-            SingleMenuView(label: "Get cardless cash",leftIcon: Icons.card_membership,),
-            SingleMenuView(label: "PayID",leftIcon: Icons.person,),
-            SingleMenuView(label: "Benefits finder",leftIcon: Icons.location_searching, rightIcon:Icons.call_made),
-            SingleMenuView(label: "Settings & security",leftIcon: Icons.settings, rightIcon:Icons.navigate_next,divider: true,),
-            Divider(height: _height*0.02,color: Colors.white54,),
-            SingleMenuView(label: "Help"),
-          ],
-        ),
-    ));
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SearchView(),
+              SingleMenuView(
+                label: "Chat with us",
+                leftIcon: Icons.message,
+              ),
+              SingleMenuView(
+                label: "My details",
+                leftIcon: Icons.person_outline,
+              ),
+              SingleMenuView(
+                label: "What's new",
+                leftIcon: Icons.star_border,
+                rightIcon: Icons.navigate_next,
+              ),
+              SingleMenuView(
+                label: "Products & offers",
+                leftIcon: Icons.local_offer,
+              ),
+              SingleMenuView(
+                label: "Find ATMa & branches",
+                leftIcon: Icons.location_on,
+              ),
+              SingleMenuView(
+                label: "Bills and upcoming payments",
+                leftIcon: Icons.calendar_today,
+              ),
+              SingleMenuView(
+                label: "Shared expenses",
+                leftIcon: Icons.group,
+              ),
+              SingleMenuView(
+                label: "Get cardless cash",
+                leftIcon: Icons.card_membership,
+              ),
+              SingleMenuView(
+                label: "PayID",
+                leftIcon: Icons.person,
+              ),
+              SingleMenuView(
+                  label: "Benefits finder",
+                  leftIcon: Icons.location_searching,
+                  rightIcon: Icons.call_made),
+              SingleMenuView(
+                label: "Settings & security",
+                leftIcon: Icons.settings,
+                rightIcon: Icons.navigate_next,
+                divider: true,
+              ),
+              Divider(
+                height: _height * 0.02,
+                color: Colors.white54,
+              ),
+              SingleMenuView(label: "Help"),
+              SingleMenuView(label: "Your feedback"),
+              Divider(
+                height: _height * 0.02,
+                color: Colors.white54,
+              ),
+              SingleMenuView(
+                  label: "Other CommBank apps",
+                  rightIcon: Icons.navigate_next),
+              SingleMenuView(
+                  label: "CommBank sites",
+                  rightIcon: Icons.navigate_next),
+            ],
+          ),
+        ));
   }
 }
