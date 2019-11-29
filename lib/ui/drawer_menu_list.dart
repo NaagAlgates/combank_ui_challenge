@@ -59,6 +59,22 @@ class DrawerMenuList extends StatelessWidget {
                   leftIcon: Icons.location_searching,
                   rightIcon: Icons.call_made),
               SingleMenuView(
+                label: "My notifications",
+                leftIcon: Icons.notifications,
+              ),
+              SingleMenuView(
+                label: "Overseas travel",
+                leftIcon: Icons.flight,
+              ),
+              SingleMenuView(
+                label: "Proof of balance",
+                leftIcon: Icons.description,
+              ),
+              SingleMenuView(
+                label: "ATM deposit codes",
+                leftIcon: Icons.dashboard,
+              ),
+              SingleMenuView(
                 label: "Settings & security",
                 leftIcon: Icons.settings,
                 rightIcon: Icons.navigate_next,
