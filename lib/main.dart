@@ -1,5 +1,6 @@
 
 import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
+import 'package:combank_ui_challenge/view/greetings_view.dart';
 import 'package:flutter/material.dart';
 
 import 'helpers/themes.dart';
@@ -52,45 +53,51 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: CustomDrawer(),
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              leading: InkWell(
-                child: MenuButton(
-                  showText: false,
-                  icon: Icons.dehaze,
-                  paddingLeft: true,
-                  paddingRight: false,
-                  paddingTop: false,
+        body: Container(
+          height: _height,
+          width: _width,
+          color: comBankThemeData.primaryColor,
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                leading: InkWell(
+                  child: MenuButton(
+                    showText: false,
+                    icon: Icons.dehaze,
+                    paddingLeft: true,
+                    paddingRight: false,
+                    paddingTop: false,
+                  ),
+                  onTap: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
                 ),
-                onTap: () {
-                  _scaffoldKey.currentState.openDrawer();
-                },
-              ),
-              actions: <Widget>[
-                MenuButton(
-                  showText: true,
-                  icon: Icons.message,
-                  paddingLeft: false,
-                  paddingRight: true,
-                  paddingTop: false,
-                )
-              ],
-              expandedHeight: _height * 0.09,
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Card(child: Text('data'),),
-                  Card(child: Text('data'),),
-                  Card(child: Text('data'),),
-                  Card(child: Text('data'),),
-
-                  // Scrollable horizontal widget here
+                actions: <Widget>[
+                  MenuButton(
+                    showText: true,
+                    icon: Icons.message,
+                    paddingLeft: false,
+                    paddingRight: true,
+                    paddingTop: false,
+                  )
                 ],
+                expandedHeight: _height * 0.09,
               ),
-            ),
-          ],
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    GreetingsSection(),
+                    Card(child: Text('data'),),
+                    Card(child: Text('data'),),
+                    Card(child: Text('data'),),
+                    Card(child: Text('data'),),
+
+                    // Scrollable horizontal widget here
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         /*body: SingleChildScrollView(
           child: Container(
