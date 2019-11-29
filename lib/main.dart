@@ -1,5 +1,5 @@
 
-import 'package:combank_ui_challenge/view/custom_drawer_menu.dart';
+import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
 import 'package:flutter/material.dart';
 
 import 'helpers/themes.dart';
