@@ -14,6 +14,8 @@ class CustomButtonWidget extends StatelessWidget {
     return RaisedButton(elevation: 10.0,
       child: Text(label,style: TextStyle(color: Colors.white,fontSize: _height*0.02),),
       color: Colors.black,
+      splashColor: Colors.white30,
+      highlightColor: Colors.black12,
       onPressed: (){
         print("Button pressed");
       },

@@ -1,5 +1,6 @@
 
 import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
+import 'package:combank_ui_challenge/view/custom_bottom_navigation_bar.dart';
 import 'package:combank_ui_challenge/view/greetings_view.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    int currentTab = 0;
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -98,6 +100,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
             ],
           ),
+        ),
+        bottomNavigationBar: Material(
+          child: CommBankBottomNavigationBar(
+              color: Colors.transparent,
+              elevation: 0.0,
+              index: currentTab,
+              labelStyle: LabelStyle(visible: false),
+              onTap: (i) {
+                setState(() {
+                  currentTab = i;
+                });
+              },
+              items: [
+                BottomNavItem(Icons.account_balance_wallet,),
+                BottomNavItem(Icons.transform,),
+                BottomNavItem(Icons.person_outline,),
+                BottomNavItem(Icons.credit_card,),
+                BottomNavItem(Icons.adb,),
+                BottomNavItem(Icons.tap_and_play,),
+              ],
+            ),
         ),
         /*body: SingleChildScrollView(
           child: Container(

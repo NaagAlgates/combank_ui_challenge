@@ -6,10 +6,10 @@ class DisplayGreetings {
     DateTime timeOfDay = DateTime.now();
     var currentHour = timeOfDay.hour;
     if (currentHour >= 0 && currentHour < 12) {
-      return "Good Morning";
+      return "Good morning";
     }else if(currentHour >= 12 && currentHour < 16){
-      return "Good Afternoon";
+      return "Good afternoon";
     }else
-      return "Good Evening";
+      return "Good evening";
     }
   }
