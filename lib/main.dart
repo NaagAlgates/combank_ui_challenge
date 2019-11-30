@@ -1,8 +1,8 @@
-
 import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
 import 'package:combank_ui_challenge/view/custom_bottom_navigation_bar.dart';
 import 'package:combank_ui_challenge/view/greetings_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'helpers/themes.dart';
 import 'view/custom_button_menu_view.dart';
@@ -29,18 +29,55 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  ScrollController _scrollBottomBarController = ScrollController();
+  bool isScrollingDown = false;
+  bool _show = false;
+  double bottomBarHeight = 75;
+  double _bottomBarOffset = 0;
   @override
   void initState() {
     super.initState();
     print("open");
+    myScroll();
   }
 
   @override
   void dispose() {
+    _scrollBottomBarController.removeListener(() {});
     print("close");
     super.dispose();
+  }
+
+  void showBottomBar() {
+    setState(() {
+      _show = true;
+    });
+  }
+
+  void hideBottomBar() {
+    setState(() {
+      _show = false;
+    });
+  }
+
+  void myScroll() async {
+    _scrollBottomBarController.addListener(() {
+      if (_scrollBottomBarController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        if (!isScrollingDown) {
+          isScrollingDown = true;
+          hideBottomBar();
+        }
+      }
+      if (_scrollBottomBarController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        if (isScrollingDown) {
+          isScrollingDown = false;
+          showBottomBar();
+        }
+      }
+    });
   }
 
   @override
@@ -55,144 +92,112 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: CustomDrawer(),
-        body: Container(
-          height: _height,
-          width: _width,
-          color: comBankThemeData.primaryColor,
-          child: CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                leading: InkWell(
-                  child: MenuButton(
-                    showText: false,
-                    icon: Icons.dehaze,
-                    paddingLeft: true,
-                    paddingRight: false,
-                    paddingTop: false,
+        body: Stack(children: <Widget>[
+          Container(
+            height: _height,
+            width: _width,
+            color: comBankThemeData.primaryColor,
+            child: CustomScrollView(
+              controller: _scrollBottomBarController,
+              slivers: <Widget>[
+                SliverAppBar(
+                  leading: InkWell(
+                    child: MenuButton(
+                      showText: false,
+                      icon: Icons.dehaze,
+                      paddingLeft: true,
+                      paddingRight: false,
+                      paddingTop: false,
+                    ),
+                    onTap: () {
+                      _scaffoldKey.currentState.openDrawer();
+                    },
                   ),
-                  onTap: () {
-                    _scaffoldKey.currentState.openDrawer();
-                  },
-                ),
-                actions: <Widget>[
-                  MenuButton(
-                    showText: true,
-                    icon: Icons.message,
-                    paddingLeft: false,
-                    paddingRight: true,
-                    paddingTop: false,
-                  )
-                ],
-                expandedHeight: _height * 0.09,
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    GreetingsSection(),
-                    Card(child: Text('data'),),
-                    Card(child: Text('data'),),
-                    Card(child: Text('data'),),
-                    Card(child: Text('data'),),
-
-                    // Scrollable horizontal widget here
+                  actions: <Widget>[
+                    MenuButton(
+                      showText: true,
+                      icon: Icons.message,
+                      paddingLeft: false,
+                      paddingRight: true,
+                      paddingTop: false,
+                    )
                   ],
+                  expandedHeight: _height * 0.09,
                 ),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      GreetingsSection(),
+                      Card(
+                        child: Text('data'),
+                      ),
+                      Card(
+                        child: Text('data'),
+                      ),
+                      Card(
+                        child: Text('data'),
+                      ),
+                      Card(
+                        child: Text('data'),
+                      ),
+                      Card(
+                        child: Text('data'),
+                      ),
+                      Card(
+                        child: Text('data'),
+                      ),
+                      Card(
+                        child: Text('data'),
+                      ),
+
+                      // Scrollable horizontal widget here
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: !_show?Container(
+              color: Colors.white,
+              height: _height*0.2,
+            ):Container(height: 0.0,),
+          ),
+        ]),
+        bottomNavigationBar: _show?Material(
+          child: CommBankBottomNavigationBar(
+            color: Colors.transparent,
+            elevation: 0.0,
+            index: currentTab,
+            labelStyle: LabelStyle(visible: false),
+            onTap: (i) {
+              setState(() {
+                currentTab = i;
+              });
+            },
+            items: [
+              BottomNavItem(
+                Icons.account_balance_wallet,
+              ),
+              BottomNavItem(
+                Icons.transform,
+              ),
+              BottomNavItem(
+                Icons.person_outline,
+              ),
+              BottomNavItem(
+                Icons.credit_card,
+              ),
+              BottomNavItem(
+                Icons.adb,
+              ),
+              BottomNavItem(
+                Icons.tap_and_play,
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: Material(
-          child: CommBankBottomNavigationBar(
-              color: Colors.transparent,
-              elevation: 0.0,
-              index: currentTab,
-              labelStyle: LabelStyle(visible: false),
-              onTap: (i) {
-                setState(() {
-                  currentTab = i;
-                });
-              },
-              items: [
-                BottomNavItem(Icons.account_balance_wallet,),
-                BottomNavItem(Icons.transform,),
-                BottomNavItem(Icons.person_outline,),
-                BottomNavItem(Icons.credit_card,),
-                BottomNavItem(Icons.adb,),
-                BottomNavItem(Icons.tap_and_play,),
-              ],
-            ),
-        ),
-        /*body: SingleChildScrollView(
-          child: Container(
-            width: _width,
-            height: _height,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  top: _height*0.0,
-                  child: Container(
-                    color: comBankThemeData.primaryColor,
-                    width: _width,
-                    height: _height*0.12,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: _height * 0.035),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            child: CustomMenu(
-                              showText: false,
-                              icon: Icons.dehaze,
-                              paddingLeft: true,
-                              paddingRight: false,
-                              paddingTop: false,
-                            ),
-                            onTap: () {
-                              _scaffoldKey.currentState.openDrawer();
-                            },
-                          ),
-                          CustomMenu(
-                            showText: true,
-                            icon: Icons.message,
-                            paddingLeft: false,
-                            paddingRight: true,
-                            paddingTop: false,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: _height*0.12,
-                  child: Container(
-                    height: _height * 0.3,
-                    width: _width,
-                    color: comBankThemeData.primaryColor,
-                  ),
-                ),
-                Positioned(
-                  top: _height*0.42,
-                  child: Container(
-                    height: _height * 0.35,
-                    width: _width,
-                    color: comBankThemeData.primaryColor,
-                  ),
-                ),
-                Positioned(
-                  top: _height*0.77,
-                  child: Container(
-                    height: _height * 0.23,
-                    width: _width,
-                    color: comBankThemeData.primaryColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),*/
+        ):Container(height: 0.0,),
       ),
     );
   }
