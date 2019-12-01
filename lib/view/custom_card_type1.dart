@@ -34,8 +34,9 @@ class _CustomCardType1State extends State<CustomCardType1> {
           height: widget.middleText != null &&
                   widget.subtitle != null &&
                   widget.title != null
-              ? _height * 0.22
-              : _height * 0.15,
+              ? _height * 0.24
+              : widget.subtitle != null &&
+              widget.title != null?_height * 0.15:_height*0.12,
           child: Padding(
             padding: EdgeInsets.all(_height * 0.03),
             child: Row(
@@ -46,20 +47,24 @@ class _CustomCardType1State extends State<CustomCardType1> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: widget.subtitle != null
                       ? CrossAxisAlignment.start
                       : CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top:10.0),
-                      child: Text(
-                        widget.title,
-                        style: TextStyle(
-                            fontSize: _height * 0.025,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                      padding: const EdgeInsets.only(top:0.0),
+                      child: Container(
+                        width: _width*0.5,
+                        child: Text(
+                          widget.title,
+                          maxLines: 4,
+                          style: TextStyle(
+                              fontSize: _height * 0.025,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     widget.middleText != null
@@ -88,8 +93,8 @@ class _CustomCardType1State extends State<CustomCardType1> {
                   ],
                 ),
                 Icon(
-                  Icons.card_membership,
-                  color: comBankThemeData.accentColor,
+                  widget.icon,
+                  color: comBankThemeData.primaryColor,
                   size: _height * 0.06,
                 )
               ],

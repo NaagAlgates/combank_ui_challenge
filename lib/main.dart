@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool _show = false;
   double bottomBarHeight = 75;
   double _bottomBarOffset = 0;
+
   @override
   void initState() {
     super.initState();
@@ -125,14 +126,43 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ],
                   expandedHeight: _height * 0.09,
                 ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      GreetingsSection(),
-                      CustomCardType1(title: "Cardless Cash",subtitle: "Find your nearest ATM",middleText: 30003.89,),
-
-                      // Scrollable horizontal widget here
-                    ],
+                SliverPadding(
+                  padding: EdgeInsets.only(bottom: _height*0.25),
+                  sliver: SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        GreetingsSection(),
+                        CustomCardType1(
+                          title: "Cardless Cash",
+                          subtitle: "Find your nearest ATM",
+                        ),
+                        CustomCardType1(
+                            title: "NetBank Saver Available funds",
+                            subtitle: "Balance \$30003.89",
+                            middleText: 30003.89,
+                          icon: Icons.monetization_on,
+                        ),
+                        CustomCardType1(
+                          title: "December cashflow",
+                          subtitle: "Log on to view",
+                          icon: Icons.view_column,
+                        ),
+                        CustomCardType1(
+                          title: "CommBank Rewards",
+                          subtitle: "Log on to view",
+                          icon: Icons.card_giftcard,
+                        ),
+                        CustomCardType1(
+                          title: "Spend Categories",
+                          subtitle: "Log on to view",
+                          icon: Icons.restaurant,
+                        ),
+                        CustomCardType1(
+                          title: "Home screen settings",
+                          icon: Icons.add,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -140,45 +170,53 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: !_show?Container(
-              color: Colors.white,
-              height: _height*0.2,
-            ):Container(height: 0.0,),
+            child: !_show
+                ? Container(
+                    color: Colors.white,
+                    height: _height * 0.2,
+                  )
+                : Container(
+                    height: 0.0,
+                  ),
           ),
         ]),
-        bottomNavigationBar: _show?Material(
-          child: CommBankBottomNavigationBar(
-            color: Colors.transparent,
-            elevation: 0.0,
-            index: currentTab,
-            labelStyle: LabelStyle(visible: false),
-            onTap: (i) {
-              setState(() {
-                currentTab = i;
-              });
-            },
-            items: [
-              BottomNavItem(
-                Icons.account_balance_wallet,
+        bottomNavigationBar: _show
+            ? Material(
+                child: CommBankBottomNavigationBar(
+                  color: Colors.transparent,
+                  elevation: 0.0,
+                  index: currentTab,
+                  labelStyle: LabelStyle(visible: false),
+                  onTap: (i) {
+                    setState(() {
+                      currentTab = i;
+                    });
+                  },
+                  items: [
+                    BottomNavItem(
+                      Icons.account_balance_wallet,
+                    ),
+                    BottomNavItem(
+                      Icons.transform,
+                    ),
+                    BottomNavItem(
+                      Icons.person_outline,
+                    ),
+                    BottomNavItem(
+                      Icons.credit_card,
+                    ),
+                    BottomNavItem(
+                      Icons.adb,
+                    ),
+                    BottomNavItem(
+                      Icons.tap_and_play,
+                    ),
+                  ],
+                ),
+              )
+            : Container(
+                height: 0.0,
               ),
-              BottomNavItem(
-                Icons.transform,
-              ),
-              BottomNavItem(
-                Icons.person_outline,
-              ),
-              BottomNavItem(
-                Icons.credit_card,
-              ),
-              BottomNavItem(
-                Icons.adb,
-              ),
-              BottomNavItem(
-                Icons.tap_and_play,
-              ),
-            ],
-          ),
-        ):Container(height: 0.0,),
       ),
     );
   }
