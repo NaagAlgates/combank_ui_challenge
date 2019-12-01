@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
 import 'package:combank_ui_challenge/view/custom_bottom_navigation_bar.dart';
 import 'package:combank_ui_challenge/view/custom_card_type1.dart';
@@ -34,14 +36,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   ScrollController _scrollBottomBarController = ScrollController();
   bool isScrollingDown = false;
-  bool _show = false;
-  double bottomBarHeight = 75;
-  double _bottomBarOffset = 0;
+  bool _show=true;
+  double bottomBarHeight = 0.0;
 
   @override
   void initState() {
     super.initState();
     print("open");
+    setState(() {
+      _show = true;
+    });
     myScroll();
   }
 
@@ -55,12 +59,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void showBottomBar() {
     setState(() {
       _show = true;
+      bottomBarHeight = 0.0;
     });
   }
 
   void hideBottomBar() {
     setState(() {
       _show = false;
+      bottomBarHeight = Platform.isIOS?240.0: 200.0;
     });
   }
 
@@ -172,12 +178,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Align(
             alignment: Alignment.bottomCenter,
             child: !_show
-                ? Container(
-                    height: _height * 0.25,
+                ? AnimatedContainer(
+                    duration: Duration(milliseconds: 80),
+                    height: bottomBarHeight,
                     child: FloatingMenu(),
                   )
-                : Container(
-                    height: 0.0,
+                : AnimatedContainer(
+                    duration: Duration(milliseconds: 80),
+                    height: bottomBarHeight,
+              child: FloatingMenu(),
                   ),
           ),
         ]),

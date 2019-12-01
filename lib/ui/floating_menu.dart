@@ -12,9 +12,10 @@ class FloatingMenu extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 3,
           childAspectRatio: (itemWidth / itemHeight),
-          controller: new ScrollController(keepScrollOffset: false),
+          //controller: new ScrollController(keepScrollOffset: false),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           children: <Widget>[
