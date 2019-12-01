@@ -1,6 +1,7 @@
 import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
 import 'package:combank_ui_challenge/view/custom_bottom_navigation_bar.dart';
 import 'package:combank_ui_challenge/view/custom_card_type1.dart';
+import 'package:combank_ui_challenge/ui/floating_menu.dart';
 import 'package:combank_ui_challenge/view/greetings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -127,7 +128,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   expandedHeight: _height * 0.09,
                 ),
                 SliverPadding(
-                  padding: EdgeInsets.only(bottom: _height*0.25),
+                  padding: EdgeInsets.only(bottom: _height * 0.3),
                   sliver: SliverList(
                     delegate: SliverChildListDelegate(
                       [
@@ -137,9 +138,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           subtitle: "Find your nearest ATM",
                         ),
                         CustomCardType1(
-                            title: "NetBank Saver Available funds",
-                            subtitle: "Balance \$30003.89",
-                            middleText: 30003.89,
+                          title: "NetBank Saver Available funds",
+                          subtitle: "Balance \$30003.89",
+                          middleText: 30003.89,
                           icon: Icons.monetization_on,
                         ),
                         CustomCardType1(
@@ -172,8 +173,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             alignment: Alignment.bottomCenter,
             child: !_show
                 ? Container(
-                    color: Colors.white,
-                    height: _height * 0.2,
+                    height: _height * 0.25,
+                    child: FloatingMenu(),
                   )
                 : Container(
                     height: 0.0,
@@ -206,7 +207,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       Icons.credit_card,
                     ),
                     BottomNavItem(
-                      Icons.adb,
+                      Icons.format_bold,
                     ),
                     BottomNavItem(
                       Icons.tap_and_play,
