@@ -24,15 +24,16 @@ class CommBankBottomNavigationBar extends md.StatefulWidget {
     this.iconStyle,
     this.color = md.Colors.white,
     this.labelStyle,
-  }) :
-        assert(items != null),
+  })  : assert(items != null),
         assert(items.length >= 2);
 
   @override
-  CommBankBottomNavigationBarState createState() => CommBankBottomNavigationBarState();
+  CommBankBottomNavigationBarState createState() =>
+      CommBankBottomNavigationBarState();
 }
 
-class CommBankBottomNavigationBarState extends md.State<CommBankBottomNavigationBar> {
+class CommBankBottomNavigationBarState
+    extends md.State<CommBankBottomNavigationBar> {
   int currentIndex;
   IconStyle iconStyle;
   LabelStyle labelStyle;
@@ -60,15 +61,19 @@ class CommBankBottomNavigationBarState extends md.State<CommBankBottomNavigation
 
             return BMNavItem(
               icon: b.icon,
-              iconSize: selected ? iconStyle.getSelectedSize() : iconStyle.getSize(),
+              iconSize:
+                  selected ? iconStyle.getSelectedSize() : iconStyle.getSize(),
               label: parseLabel(b.label, labelStyle, selected),
               onTap: () => onItemClick(i),
-              textStyle: selected ? labelStyle.getOnSelectTextStyle() : labelStyle.getTextStyle(),
-              color: selected ? iconStyle.getSelectedColor() : iconStyle.getColor(),
+              textStyle: selected
+                  ? labelStyle.getOnSelectTextStyle()
+                  : labelStyle.getTextStyle(),
+              color: selected
+                  ? iconStyle.getSelectedColor()
+                  : iconStyle.getColor(),
             );
           }).toList(),
-        )
-    );
+        ));
   }
 
   onItemClick(int i) {
@@ -104,12 +109,11 @@ class LabelStyle {
   final md.TextStyle textStyle;
   final md.TextStyle onSelectTextStyle;
 
-  LabelStyle({
-    this.visible,
-    this.showOnSelect,
-    this.textStyle,
-    this.onSelectTextStyle
-  });
+  LabelStyle(
+      {this.visible,
+      this.showOnSelect,
+      this.textStyle,
+      this.onSelectTextStyle});
 
   isVisible() {
     return visible ?? true;
@@ -216,44 +220,44 @@ class BMNavItem extends md.StatelessWidget {
     this.onTap,
     this.color,
     this.textStyle,
-  }) :
-        assert(icon != null),
+  })  : assert(icon != null),
         assert(iconSize != null),
         assert(color != null),
         assert(onTap != null);
 
   @override
   md.Widget build(md.BuildContext context) {
-
     return md.Expanded(
         child: md.InkResponse(
-          key: key,
-          child: md.Padding(
-              padding: getPadding(),
-              child: md.Column(
-                  mainAxisSize: md.MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <md.Widget>[
-                    md.Icon(icon, size: iconSize, color: color),
-                    label != null? md.Text(label, style: textStyle):md.Container()
-                  ]
-              )
-          ),
-          highlightColor: /*md.Theme.of(context).highlightColor*/ md.Colors.transparent,
-          splashColor: md.Colors.transparent,
-          radius: md.Material.defaultSplashRadius,
-          onTap: () => onTap(),
-        )
-    );
+      key: key,
+      child: md.Padding(
+          padding: getPadding(),
+          child: md.Column(
+              mainAxisSize: md.MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <md.Widget>[
+                md.Icon(icon, size: iconSize, color: color),
+                label != null
+                    ? md.Text(label, style: textStyle)
+                    : md.Container()
+              ])),
+      highlightColor: /*md.Theme.of(context).highlightColor*/ md
+          .Colors.transparent,
+      splashColor: md.Colors.transparent,
+      radius: md.Material.defaultSplashRadius,
+      onTap: () => onTap(),
+    ));
   }
 
   getPadding() {
     if (label != null) {
-      final double p = ((56-textStyle.fontSize)-iconSize)/2;
+      final double p = ((56 - textStyle.fontSize) - iconSize) / 2;
       return md.EdgeInsets.fromLTRB(0.0, p, 0.0, p);
     }
     return md.EdgeInsets.fromLTRB(
-        0.0, (36-iconSize)/2, 0.0, (36-iconSize)/2
-    );
+        0.0,
+        Platform.isIOS ? (66 - iconSize) / 2 : (46 - iconSize) / 2,
+        0.0,
+        Platform.isIOS ? (66 - iconSize) / 2 : (46 - iconSize) / 2);
   }
 }

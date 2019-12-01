@@ -56,7 +56,7 @@ class _CustomCardType1State extends State<CustomCardType1> {
                     Padding(
                       padding: const EdgeInsets.only(top:0.0),
                       child: Container(
-                        width: _width*0.5,
+                        width:  _width*0.6,
                         child: Text(
                           widget.title,
                           maxLines: 4,
@@ -95,7 +95,7 @@ class _CustomCardType1State extends State<CustomCardType1> {
                 Icon(
                   widget.icon,
                   color: comBankThemeData.primaryColor,
-                  size: _height * 0.06,
+                  size: _height * 0.04,
                 )
               ],
             ),
