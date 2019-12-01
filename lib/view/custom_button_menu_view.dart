@@ -2,11 +2,10 @@ import 'package:combank_ui_challenge/helpers/themes.dart';
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatefulWidget {
-  var icon;
-  var iconColor;
-  var backgroundColor;
-  var paddingRight = false, paddingLeft = false, paddingTop, showText;
-  var _textVisibility = false;
+  final icon;
+  final iconColor;
+  final backgroundColor;
+  final paddingRight, paddingLeft, paddingTop, showText;
 
   MenuButton(
       {Key key,
@@ -27,6 +26,7 @@ class MenuButton extends StatefulWidget {
 }
 
 class _MenuButtonState extends State<MenuButton> {
+  var _textVisibility = false;
   @override
   void initState() {
     super.initState();
@@ -56,7 +56,7 @@ class _MenuButtonState extends State<MenuButton> {
         child: AnimatedContainer(
           duration: Duration(milliseconds: 200),
           height: 45.0,
-          width: widget.showText && widget._textVisibility
+          width: widget.showText && _textVisibility
               ? _height * 0.1
               : 45.0,
           color: widget.backgroundColor == null
@@ -76,13 +76,13 @@ class _MenuButtonState extends State<MenuButton> {
                       : widget.iconColor,
                 ),
                 Visibility(
-                  visible: widget._textVisibility,
+                  visible: _textVisibility,
                   child: Padding(
-                    padding: widget.showText && widget._textVisibility
+                    padding: widget.showText && _textVisibility
                         ? EdgeInsets.only(left: _height * 0.008)
                         : const EdgeInsets.only(left: 0.0),
                     child: Text(
-                      widget.showText && widget._textVisibility ? "Hi" : "",
+                      widget.showText && _textVisibility ? "Hi" : "",
                       style: TextStyle(
                           color: Colors.black, fontSize: _height * 0.020),
                     ),
@@ -99,7 +99,7 @@ class _MenuButtonState extends State<MenuButton> {
   void displayText() {
     Future.delayed(const Duration(milliseconds: 1500), () {
       setState(() {
-        widget._textVisibility = true;
+        _textVisibility = true;
       });
     });
   }
@@ -107,7 +107,7 @@ class _MenuButtonState extends State<MenuButton> {
   void hideText() {
     Future.delayed(const Duration(milliseconds: 3000), () {
       setState(() {
-        widget._textVisibility = false;
+        _textVisibility = false;
       });
     });
   }

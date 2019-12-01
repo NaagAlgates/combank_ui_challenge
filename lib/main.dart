@@ -1,5 +1,6 @@
 import 'package:combank_ui_challenge/ui/custom_drawer_menu.dart';
 import 'package:combank_ui_challenge/view/custom_bottom_navigation_bar.dart';
+import 'package:combank_ui_challenge/view/custom_card_type1.dart';
 import 'package:combank_ui_challenge/view/greetings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -128,27 +129,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   delegate: SliverChildListDelegate(
                     [
                       GreetingsSection(),
-                      Card(
-                        child: Text('data'),
-                      ),
-                      Card(
-                        child: Text('data'),
-                      ),
-                      Card(
-                        child: Text('data'),
-                      ),
-                      Card(
-                        child: Text('data'),
-                      ),
-                      Card(
-                        child: Text('data'),
-                      ),
-                      Card(
-                        child: Text('data'),
-                      ),
-                      Card(
-                        child: Text('data'),
-                      ),
+                      CustomCardType1(title: "Cardless Cash",subtitle: "Find your nearest ATM",middleText: 30003.89,),
 
                       // Scrollable horizontal widget here
                     ],
